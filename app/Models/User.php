@@ -65,24 +65,42 @@ class User extends Authenticatable
        return $this->hasOne('App\models\Profile');
     }
 
-    
+
     //RELACION UNO A MUCHOS
     public function course_dictated()
     {
        return $this->hasMany('App\models\Course');
     }
 
+        //RELACION UNO A UNO
+    public function course_enrroled()
+    {
+        return $this->belongsToMany('App\models\course');
+    }
 
-    public function reviews()
+
+    //RELACION UNO A MUCHOS
+
+     public function reviews()
     {
         return $this->hasMany('App\Models\Review');
     }
 
 
-        //RELACION UNO A UNO
-    public function course_enrroled()
+    public function comments()
     {
-        return $this->belongsToMany('App\models\course');
+        return $this->hasMany('App\Models\Comment');
+    }
+
+    public function reactions()
+    {
+        return $this->hasMany('App\Models\Reaction');
+    }
+
+
+    public function lessons(){
+
+        return $this->belongsToMany('App\Models\Lesson');
     }
 
 }

@@ -5,17 +5,15 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Level extends Model
+class Requirement extends Model
 {
     use HasFactory;
 
     protected $guarded = ['id'];
     
     //relacion uno a muchos
-    public function courses()
+    public function course()
     {
-        return $this->hasMany('App\Models\Course');
-    }   
-    
-    
+        return $this->belongsTo('App\Models\Course');
+    }
 }

@@ -16,8 +16,8 @@ return new class extends Migration
     {
         Schema::create('courses', function (Blueprint $table) {
             $table->id();
-            $table->string("titulo_corto");
-            $table->string("titulo_largo");
+            $table->string("title");
+            $table->string("subtitle");
             $table->text("descripcion");
             $table->enum("status",[Course::BORRADOR,Course::REVISION,Course::PUBLICADO])->default(Course::BORRADOR);
             $table->string("slug");
