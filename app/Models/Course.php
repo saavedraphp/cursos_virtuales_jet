@@ -9,14 +9,25 @@ class Course extends Model
 {
    use HasFactory;
 
-   protected $guarded = ['id','status'];
-
+   protected $guarded = ['id', 'status'];
+   protected $withCount = ['students','reviews'];
 
 
    const BORRADOR = 1;
    const REVISION = 2;
    const PUBLICADO = 3;
 
+
+   public function getRatingAttribute()
+   {
+      if($this->reviews_count)
+      {
+         return round($this->reviews->avg('rating'),1);
+
+      }
+      else
+      return 5;
+   }
 
    //RELACION UNO A MUCHOS
    public function reviews()
@@ -79,15 +90,14 @@ class Course extends Model
       return $this->belongsToMany('App\Models\User');
    }
 
-// realacion uno a uno polimorfica
+   // realacion uno a uno polimorfica
    public function imagen()
    {
-      return $this->morphOne('App\Models\Image','imageable');
+      return $this->morphOne('App\Models\Image', 'imageable');
    }
 
    public function lessons()
    {
-   return $this->hasManyThrough('App\Models\lesson','App\Models\Section');
+      return $this->hasManyThrough('App\Models\lesson', 'App\Models\Section');
    }
-
 }
